@@ -8,11 +8,22 @@ let squareSize;
 let rowSize;
 
 gridBtn.addEventListener("click" , () => {
+
+    reset();
     let desiredSize = prompt("Enter desired grid squares per side");
-    gridSize = +desiredSize;
+    
+    if(desiredSize > 100){
+        desiredSize = 100;
+    }
+    else if (desiredSize < 0 || !Number(desiredSize)){
+        desiredSize = 2;
+    }
+
+    gridSize = desiredSize;
     calculateGridDimensions();
     createGrid();
     console.log(gridSize);
+    console.log('Button pressed');
 });
 
 
@@ -64,3 +75,6 @@ function createGrid(){
     }
 }
 
+function reset(){
+    container.innerHTML = "";
+}
