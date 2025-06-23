@@ -65,16 +65,33 @@ function createGrid(){
             square.style.margin = "0px";
         
             row.appendChild(square);
+            
     
             square.addEventListener("mouseenter", hover); 
         }  
     }
     
     function hover(e){
-        e.target.style.backgroundColor = "pink";
+        let square = e.target;
+        let darkness = Number(square.getAttribute("data-darkness"));
+
+        let r_value = Math.floor(Math.random() * 256);
+        let g_value = Math.floor(Math.random() * 256);
+        let b_value = Math.floor(Math.random() * 256);
+
+        if(darkness < 10){
+            darkness += 1;
+            square.setAttribute("data-darkness", darkness);
+            let opacity = darkness/10
+            square.style.backgroundColor = `rgba(${r_value}, ${g_value}, ${b_value}, ${opacity})`;
+        }
     }
 }
 
 function reset(){
     container.innerHTML = "";
 }
+
+gridSize = 16;
+calculateGridDimensions();
+createGrid();
